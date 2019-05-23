@@ -1,0 +1,33 @@
+<div *ngIf="inProgress; else list">
+  Loading...
+</div>
+<ng-template #list>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Short name</th>
+        <th>$ Value</th>
+        <th>last 24h.</th>
+        <th>Amount you own</th>
+        <th>$ value of your coin</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td>{{item.name}}</td>
+        <td>{{item.symbol}}</td>
+        <td>{{item.quote.USD.price}}</td>
+        <td [ngClass]="item.quote.USD.percent_change_24h > 0 ? 'positive': 'negative'">{{item.quote.USD.percent_change_24h | number: '.2-2'}}</td>
+        <td>
+          {{getAmount(item.id)}}
+          <br/>
+          <input type="number" step="any" min="0" [(ngModel)]="amounts[item.id]">
+          <br/>
+          <button [disabled]="!amounts[item.id]" (click)="setAmount(item.id, amounts[item.id])">Submit</button>
+        </td>
+        <td>{{item.quote.USD.price * getAmount(item.id)}}</td>
+      </tr>
+    </tbody>
+  </table>
+</ng-template>
