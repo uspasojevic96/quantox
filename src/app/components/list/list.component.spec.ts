@@ -289,5 +289,48 @@ describe('ListComponent', () => {
         }).not.toThrow();
       });
     });
+
+    describe(' - Testing validateField', () => {
+      let value;
+
+      describe(' - Testing when value is undefined', () => {
+        beforeEach(() => {
+          object.amounts['1'] = undefined;
+        });
+
+        it(' - Function will not throw', () => {
+          expect(() => {
+            value = object.validateField('1');
+          }).not.toThrow();
+          expect(value).toBe(true);
+        });
+      });
+
+      describe(' - Testing when value is defined and correct', () => {
+        beforeEach(() => {
+          object.amounts['1'] = 1;
+        });
+
+        it(' - Function will not throw', () => {
+          expect(() => {
+            value = object.validateField('1');
+          }).not.toThrow();
+          expect(value).toBe(false);
+        });
+      });
+
+      describe(' - Testing when value is defined and incorrect', () => {
+        beforeEach(() => {
+          object.amounts['1'] = 'a';
+        });
+
+        it(' - Function will not throw', () => {
+          expect(() => {
+            value = object.validateField('1');
+          }).not.toThrow();
+          expect(value).toBe(true);
+        });
+      });
+    });
   });
 });

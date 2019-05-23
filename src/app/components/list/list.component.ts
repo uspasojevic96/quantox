@@ -62,7 +62,7 @@ export class ListComponent implements OnInit {
    * Returns the amount of specified cryptocurrency the user has
    */
   private getAmount(id: string): number {
-    return parseInt(this.getLocalStorageData(id).amount, 10) || 0;
+    return parseFloat(this.getLocalStorageData(id).amount) || 0;
   }
 
   /**
@@ -130,5 +130,14 @@ export class ListComponent implements OnInit {
    */
   private setLocalStorageData(id, data): void {
     localStorage.setItem(id, JSON.stringify(data));
+  }
+
+  private validateField(id: string): boolean {
+    let valid = false;
+    const regex = /^[0-9](\.[0-9]+)?$/g;
+    if (this.amounts[id]) {
+      valid = regex.test(this.amounts[id]);
+    }
+    return !valid;
   }
 }

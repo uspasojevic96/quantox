@@ -20,9 +20,9 @@
       <td>
         {{getAmount(item.id)}}
         <br/>
-        <input type="number" step="any" min="0" [(ngModel)]="amounts[item.id]">
+        <input type="text" [(ngModel)]="amounts[item.id]">
         <br/>
-        <button [disabled]="amounts[item.id] === undefined" (click)="setAmount(item.id, amounts[item.id], item.quote.USD.price)">Submit</button>
+        <button [disabled]="validateField(item.id)" (click)="setAmount(item.id, amounts[item.id], item.quote.USD.price)">Submit</button>
       </td>
       <td>${{item.quote.USD.price * getAmount(item.id)}}</td>
       <td>${{item.profits ? item.profits : 0}}</td>
