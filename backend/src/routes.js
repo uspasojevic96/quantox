@@ -1,7 +1,7 @@
 import express from 'express';
 import request from 'request';
+
 const router = express.Router();
-const API_HEADER = 'X-CMC_PRO_API_KEY';
 const API_KEY = '4e2860ec-99d6-40ea-84f5-4a93ccfbb99c';
 
 function getOptions() {
