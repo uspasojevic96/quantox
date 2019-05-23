@@ -16,20 +16,25 @@ import {NgxUiLoaderService} from 'ngx-ui-loader';
 })
 export class ListComponent implements OnInit {
   /**
+   * Model object containing all input values
+   * This property is used for ease of access to each input field without creating any additional forms
+   */
+  private amounts = {};
+
+  /**
    * Indicator flag which is used to check if request is in progress already
    */
-  private inProgress = true;
+  private inProgress;
+
+  /**
+   * Interval id from setInterval function
+   */
+  private intervalId;
 
   /**
    * Collection of 50 most valuable cryptocurrencies
    */
   private items: any[];
-
-  /**
-   * Model object containing all input values
-   * This property is used for ease of access to each input field without creating any additional forms
-   */
-  private amounts = {};
 
   /**
    * Current page, default value is 1
@@ -64,9 +69,11 @@ export class ListComponent implements OnInit {
    * Initializes loading mask and proceeds to gather data from backend
    */
   private getData(): void {
-    this.ngxLoader.start();
-    this.apiService.getCryptocurrencies()
-      .then(this.processData.bind(this));
+    if (!this.inProgress) {
+      this.ngxLoader.start();
+      this.apiService.getCryptocurrencies()
+        .then(this.processData.bind(this));
+    }
   }
 
   /**
@@ -102,6 +109,9 @@ export class ListComponent implements OnInit {
     this.items = data.data.map(this.mapData.bind(this));
     this.inProgress = false;
     this.ngxLoader.stop();
+    if (!this.intervalId) {
+      this.intervalId = setInterval(this.getData.bind(this), 60000);
+    }
   }
 
   /**
