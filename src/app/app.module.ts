@@ -10,6 +10,7 @@ import {DetailsComponent} from './components/details/details.component';
 import {ApiService} from './services/api.service';
 import {PositiveNumberPipe} from './pipes/positive-number.pipe';
 import {NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgxUiLoaderModule} from 'ngx-ui-loader';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgbPaginationModule
+    NgbPaginationModule,
+    NgxUiLoaderModule
   ],
   providers: [
     ApiService

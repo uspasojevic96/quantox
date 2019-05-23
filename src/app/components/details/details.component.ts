@@ -1,6 +1,13 @@
+/**
+ * Details component
+ * Shows all available data about specified cryptocurrency
+ *
+ * @author Uros Spasojevic
+ */
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ApiService} from '../../services/api.service';
+import {NgxUiLoaderService} from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-details-component',
@@ -8,31 +15,52 @@ import {ApiService} from '../../services/api.service';
   styleUrls: ['details.component.scss']
 })
 export class DetailsComponent implements OnInit {
+  /**
+   * Data about specific cryptocurrency
+   */
   private data;
-  private id;
+
+  /**
+   * Indicator flag which is used to check if request is in progress already
+   */
   private inProgress = true;
 
   constructor(private route: ActivatedRoute,
-              private apiService: ApiService) {
+              private apiService: ApiService,
+              private ngxLoader: NgxUiLoaderService) {
   }
 
+  /**
+   * Angular life cycle hook
+   * Reads route parameters
+   */
   public ngOnInit(): void {
     this.route.params.subscribe(this.processRouteParams.bind(this));
   }
 
-  private getData(): void {
-    this.apiService.getCryptocurrencyInfo(this.id)
-      .then(this.processData.bind(this));
+  /**
+   * Retrieves data from backend about specified cryptocurrency
+   */
+  private getData(id: string): void {
+    this.ngxLoader.start();
+    this.apiService.getCryptocurrencyInfo(id)
+      .then(this.processData.bind(this, id));
   }
 
-  private processData(data: any): void {
-    this.data = data.data[this.id];
+  /**
+   * Processes data
+   */
+  private processData(id: string, data: any): void {
+    this.data = data.data[id];
     this.inProgress = false;
+    this.ngxLoader.stop();
   }
 
-  private processRouteParams(params: any) {
-    this.id = params.id;
-    this.getData();
+  /**
+   * Processes route parameters and starts retrieving data
+   */
+  private processRouteParams(params: any): void {
+    this.getData(params.id);
   }
 }
 

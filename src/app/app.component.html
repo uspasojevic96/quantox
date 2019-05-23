@@ -1,4 +1,7 @@
-<nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand" [routerLink]="['/']">Home</a>
-</nav>
-<router-outlet></router-outlet>
+<div ngxUiLoaderBlurred blur="10">
+  <nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" [routerLink]="['/']">Home</a>
+  </nav>
+  <router-outlet></router-outlet>
+</div>
+<ngx-ui-loader></ngx-ui-loader>
