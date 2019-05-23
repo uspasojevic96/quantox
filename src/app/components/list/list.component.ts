@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {ApiService} from '../../services/api.service';
 
 @Component({
   selector: 'app-list-component',
@@ -10,7 +10,8 @@ export class ListComponent implements OnInit {
   private inProgress = true;
   private items;
   private amounts = {};
-  constructor(private httpClient: HttpClient) {
+
+  constructor(private apiService: ApiService) {
   }
 
   public ngOnInit(): void {
@@ -22,7 +23,8 @@ export class ListComponent implements OnInit {
   }
 
   private getData(): void {
-    this.httpClient.get('http://localhost:3600/data').subscribe(this.processData.bind(this), this.logError.bind(this));
+    // this.apiService.getCryptocurrencies()
+    //   .then(this.processData.bind(this));
   }
 
   private processData(data): void {
@@ -32,9 +34,5 @@ export class ListComponent implements OnInit {
 
   private setAmount(id, amount): void {
     localStorage.setItem(id, amount);
-  }
-
-  private logError(error: any): void {
-    console.log(error);
   }
 }

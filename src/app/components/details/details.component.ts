@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, ParamMap} from '@angular/router';
-import {switchMap} from 'rxjs/operators';
-import {ObservableInput} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import {ActivatedRoute} from '@angular/router';
+import {ApiService} from '../../services/api.service';
 
 @Component({
   selector: 'app-details-component',
@@ -10,26 +8,21 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['details.component.scss']
 })
 export class DetailsComponent implements OnInit {
+  private data;
   private id;
   private inProgress = true;
-  private data;
 
   constructor(private route: ActivatedRoute,
-              private httpClient: HttpClient) {
+              private apiService: ApiService) {
   }
 
   public ngOnInit(): void {
     this.route.params.subscribe(this.processRouteParams.bind(this));
   }
 
-  private processRouteParams(params: any) {
-    this.id = params.id;
-    this.getData();
-  }
-
   private getData(): void {
-    this.httpClient.get(`http://localhost:3600/info/${this.id}`)
-      .subscribe(this.processData.bind(this), this.logError.bind(this));
+    this.apiService.getCryptocurrencyInfo(this.id)
+      .then(this.processData.bind(this));
   }
 
   private processData(data: any): void {
@@ -37,8 +30,9 @@ export class DetailsComponent implements OnInit {
     this.inProgress = false;
   }
 
-  private logError(error): void {
-    console.log(error);
+  private processRouteParams(params: any) {
+    this.id = params.id;
+    this.getData();
   }
 }
 
