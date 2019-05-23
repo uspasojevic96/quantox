@@ -22,13 +22,6 @@ export class ListComponent implements OnInit {
   }
 
   private getData(): void {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Accept: 'application/json',
-        'X-CMC_PRO_API_KEY': '4e2860ec-99d6-40ea-84f5-4a93ccfbb99c'
-      })
-    };
-
     this.httpClient.get('http://localhost:3600/data').subscribe(this.processData.bind(this), this.logError.bind(this));
   }
 

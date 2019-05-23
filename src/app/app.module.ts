@@ -6,11 +6,13 @@ import {AppRoutingModule} from './app-routing.module';
 import {ListComponent} from './components/list/list.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
+import {DetailsComponent} from './components/details/details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ListComponent
+    ListComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,
