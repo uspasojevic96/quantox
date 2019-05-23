@@ -11,8 +11,7 @@ import {NgxUiLoaderService} from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-details-component',
-  templateUrl: 'details.component.html',
-  styleUrls: ['details.component.scss']
+  templateUrl: 'details.component.html'
 })
 export class DetailsComponent implements OnInit {
   /**
