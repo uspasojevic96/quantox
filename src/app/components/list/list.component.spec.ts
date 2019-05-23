@@ -265,9 +265,6 @@ describe('ListComponent', () => {
 
     describe(' - Testing setAmount', () => {
       beforeEach(() => {
-        spyOn(object, 'getLocalStorageData').and.callFake(() => {
-          return {};
-        });
         spyOn(object, 'setLocalStorageData');
       });
 

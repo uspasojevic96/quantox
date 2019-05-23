@@ -118,9 +118,10 @@ export class ListComponent implements OnInit {
    * Loads last saved data if any and sets new amount and total for specified cryptocurrency
    */
   private setAmount(id: string, amount: number, price: number): void {
-    const data = this.getLocalStorageData(id);
-    data.amount = amount;
-    data.pastTotal = amount * price;
+    const data = {
+      amount,
+      pastTotal: amount * price
+    };
     this.amounts[id] = undefined;
     this.setLocalStorageData(id, data);
   }
@@ -137,7 +138,7 @@ export class ListComponent implements OnInit {
    */
   private validateField(id: string): boolean {
     let valid = false;
-    const regex = /^[0-9](\.[0-9]+)?$/g;
+    const regex = /^[0-9]*(\.[0-9]+)?$/g;
     if (this.amounts[id]) {
       valid = regex.test(this.amounts[id]);
     }
