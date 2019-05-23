@@ -26,7 +26,7 @@ export class DetailsComponent implements OnInit {
   }
 
   private processData(data: any): void {
-    this.data = data.data;
+    this.data = data.data[this.id];
     this.inProgress = false;
   }
 

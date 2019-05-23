@@ -10,6 +10,8 @@ export class ListComponent implements OnInit {
   private inProgress = true;
   private items;
   private amounts = {};
+  private page = 1;
+  private pageSize = 10;
 
   constructor(private apiService: ApiService) {
   }
@@ -23,8 +25,8 @@ export class ListComponent implements OnInit {
   }
 
   private getData(): void {
-    // this.apiService.getCryptocurrencies()
-    //   .then(this.processData.bind(this));
+    this.apiService.getCryptocurrencies()
+      .then(this.processData.bind(this));
   }
 
   private processData(data): void {

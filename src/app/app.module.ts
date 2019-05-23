@@ -8,18 +8,22 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {DetailsComponent} from './components/details/details.component';
 import {ApiService} from './services/api.service';
+import {PositiveNumberPipe} from './pipes/positive-number.pipe';
+import {NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListComponent,
-    DetailsComponent
+    DetailsComponent,
+    PositiveNumberPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbPaginationModule
   ],
   providers: [
     ApiService

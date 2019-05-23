@@ -1,1 +1,61 @@
-Hello details
+<div *ngIf="inProgress; else list"></div>
+<ng-template #list>
+  <table class="table">
+    <tr>
+      <td>Name</td>
+      <td>{{data.name}}</td>
+    </tr>
+    <tr>
+      <td>Short name</td>
+      <td>{{data.symbol}}</td>
+    </tr>
+    <tr>
+      <td>Circulating supply</td>
+      <td>{{data.circulating_supply}}</td>
+    </tr>
+    <tr>
+      <td>Total supply</td>
+      <td>{{data.total_supply}}</td>
+    </tr>
+    <tr>
+      <td>Total supply</td>
+      <td>{{data.total_supply}}</td>
+    </tr>
+    <tr>
+      <td>Maximum supply</td>
+      <td>{{data.max_supply ? data.max_supply : 'Unknown'}}</td>
+    </tr>
+    <tr>
+      <td>Date added</td>
+      <td>{{data.date_added | date}}</td>
+    </tr>
+    <tr>
+      <td>Last updated</td>
+      <td>{{data.last_updated | date}}</td>
+    </tr>
+    <tr>
+      <td>Value</td>
+      <td>${{data.quote.USD.price}}</td>
+    </tr>
+    <tr>
+      <td>Volume last 24h</td>
+      <td>{{data.quote.USD.volume_24h}}</td>
+    </tr>
+    <tr>
+      <td>% change last 1h</td>
+      <td>{{data.quote.USD.percent_change_1h}}</td>
+    </tr>
+    <tr>
+      <td>% change last 24h</td>
+      <td>{{data.quote.USD.percent_change_24h}}</td>
+    </tr>
+    <tr>
+      <td>% change last 7d</td>
+      <td>{{data.quote.USD.percent_change_7d}}</td>
+    </tr>
+    <tr>
+      <td>Market cap</td>
+      <td>{{data.quote.USD.market_cap}}</td>
+    </tr>
+  </table>
+</ng-template>

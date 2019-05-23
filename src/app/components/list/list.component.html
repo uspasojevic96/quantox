@@ -14,11 +14,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of items">
+      <tr *ngFor="let item of items | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
         <td [routerLink]="['/details', item.id]">{{item.name}}</td>
         <td>{{item.symbol}}</td>
-        <td>{{item.quote.USD.price}}</td>
-        <td [ngClass]="item.quote.USD.percent_change_24h > 0 ? 'positive': 'negative'">{{item.quote.USD.percent_change_24h | number: '.2-2'}}</td>
+        <td>{{item.quote.USD.price | number: '.2-3'}}</td>
+        <td [ngClass]="item.quote.USD.percent_change_24h > 0 ? 'positive': 'negative'">{{item.quote.USD.percent_change_24h | number: '.2-2' | positiveNumber}}</td>
         <td>
           {{getAmount(item.id)}}
           <br/>
@@ -30,4 +30,5 @@
       </tr>
     </tbody>
   </table>
+  <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="items.length"></ngb-pagination>
 </ng-template>
