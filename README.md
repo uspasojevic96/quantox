@@ -22,3 +22,5 @@ Backend is on port 3600, frontend is on port 4200
 * In case that you need to replace the API key for coinmarketcap, it is located in `backend/src/routes.js` 
 * In case that you need to change backend port it is located in `backend/src/index.js`
 * In case that you change the backend port from above then you need to update the port in `src/app/services/api.service.ts`
+* Clicking on Home returns you to list view
+* Decided to keep bootstrap due to it's natural responsiveness
