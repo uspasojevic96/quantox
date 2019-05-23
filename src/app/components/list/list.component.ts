@@ -132,6 +132,9 @@ export class ListComponent implements OnInit {
     localStorage.setItem(id, JSON.stringify(data));
   }
 
+  /**
+   * Validates field with the specified id
+   */
   private validateField(id: string): boolean {
     let valid = false;
     const regex = /^[0-9](\.[0-9]+)?$/g;
