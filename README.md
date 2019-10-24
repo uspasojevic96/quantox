@@ -1,6 +1,6 @@
-#CryptoTrack App
+# CryptoTrack App
 
-##Usage
+## Usage
 
 * Install node modules in `backend` directory and start it:
 ```text
